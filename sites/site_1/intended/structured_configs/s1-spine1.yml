@@ -19,7 +19,7 @@ local_users:
 - name: arista
   privilege: 15
   role: network-admin
-  sha512_password: $6$workshop$02C8O5vzG5ECowtBIA5c3xZ7MAlIaVnHgEnNmQyjXvU3L/wXOBF3DCSMs3NT/dwAcfCMbBM5cW1IScnlLg9U11
+  sha512_password: $6$workshop$q0DTjNWTaQBtWIJfOJUl/5U/pKxKLRPD7aEaawNVul1UaCdAAfi4yqQFgAGqUDX9MyrNElqNMvMUHU6thbAR10
 vrfs:
 - name: default
   ip_routing: false
@@ -107,6 +107,13 @@ port_channel_interfaces:
   mode: trunk
   vlans: '20'
   mlag: 4
+- name: Port-Channel9
+  description: RACK3_Po2
+  type: switched
+  shutdown: false
+  mode: trunk
+  vlans: 10,20
+  mlag: 9
 ethernet_interfaces:
 - name: Ethernet1
   peer: s1-spine2
@@ -167,6 +174,26 @@ ethernet_interfaces:
   type: port-channel-member
   channel_group:
     id: 4
+    mode: active
+- name: Ethernet9
+  peer: s1-leaf5
+  peer_interface: Ethernet2
+  peer_type: leaf
+  description: S1-LEAF5_Ethernet2
+  shutdown: false
+  type: port-channel-member
+  channel_group:
+    id: 9
+    mode: active
+- name: Ethernet10
+  peer: s1-leaf6
+  peer_interface: Ethernet2
+  peer_type: leaf
+  description: S1-LEAF6_Ethernet2
+  shutdown: false
+  type: port-channel-member
+  channel_group:
+    id: 9
     mode: active
 - name: Ethernet7
   peer: WANCORE
